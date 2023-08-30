@@ -18,9 +18,13 @@ mongoose
   .then(() => console.log("Connected!"));
 
 app.get("/", async (req, res) => {
- 
-    
-    res.status(200).json("bimci");
+ try {
+    const result = await ChartData.find({});
+    res.status(200).json(result);
+     } catch (error) {
+    res.status(500).json({ error: "Error retrieving data" });
+  }
+   
  
 });
 
